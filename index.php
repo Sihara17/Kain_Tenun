@@ -1,5 +1,7 @@
 <?php
 
-echo "Website Kain Tenun Berhasil";
+include 'config/koneksi.php';
+
+echo "Koneksi Database Berhasil";
 
 ?>
