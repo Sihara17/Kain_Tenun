@@ -1,14 +1,7 @@
 <?php
-
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "",
-    "kain_tenun"
-);
+$conn = mysqli_connect("localhost","root","","kain_tenun");
 
 if(!$conn){
-    die("Koneksi Database Gagal");
+die("Koneksi gagal");
 }
-
 ?>

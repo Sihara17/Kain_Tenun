@@ -1,53 +1,51 @@
 <?php
 include '../config/session.php';
 include '../config/koneksi.php';
-
-$total_produk = mysqli_num_rows(
-    mysqli_query($conn,"SELECT * FROM produk")
-);
-
-$total_transaksi = mysqli_num_rows(
-    mysqli_query($conn,"SELECT * FROM transaksi")
-);
-
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Dashboard Admin</title>
+<?php include 'partials/sidebar.php'; ?>
+<?php include 'partials/navbar.php'; ?>
 
-    <link rel="stylesheet"
-          href="../assets/css/style.css">
+<!-- CONTENT WRAPPER -->
+<div style="margin-left:250px; padding:20px;">
 
-</head>
+<?php
+$produk = mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(*) AS total FROM produk"));
+$user = mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(*) AS total FROM users"));
+$transaksi = mysqli_fetch_array(mysqli_query($conn,"SELECT COUNT(*) AS total FROM transaksi"));
+?>
 
-<body>
+<h3>📊 Dashboard Admin</h3>
 
-<h1>Dashboard Admin</h1>
+<div class="row mt-4">
 
-<a href="../auth/logout.php">
-    Logout
-</a>
+<div class="col-md-3">
+<div class="card bg-primary text-white p-3">
+<h5>Produk</h5>
+<h3><?= $produk['total']; ?></h3>
+<a href="produk/index.php" class="text-white">Lihat →</a>
+</div>
+</div>
 
-<div class="card">
+<div class="col-md-3">
+<div class="card bg-success text-white p-3">
+<h5>User</h5>
+<h3><?= $user['total']; ?></h3>
+</div>
+</div>
 
-    <h3>Total Produk</h3>
-    <p><?= $total_produk; ?></p>
+<div class="col-md-3">
+<div class="card bg-warning text-dark p-3">
+<h5>Transaksi</h5>
+<h3><?= $transaksi['total']; ?></h3>
+<a href="transaksi/index.php">Lihat →</a>
+</div>
+</div>
 
 </div>
 
-<div class="card">
-
-    <h3>Total Transaksi</h3>
-    <p><?= $total_transaksi; ?></p>
-
 </div>
 
-<a href="produk/index.php">
-    Kelola Produk
-</a>
-
-</body>
-</html>
+<?php include 'partials/footer.php'; ?>
